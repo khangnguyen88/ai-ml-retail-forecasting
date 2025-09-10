@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-This document explains the technical choices made throughout the demand forecasting and pricing optimization project, providing detailed justification for each decision. These choices resulted in an optimized ensemble model that achieves 92.5% R² score and outperforms classical SARIMAX by 56% in RMSE (4.28 vs 9.71). SARIMAX was significantly improved from R² = -0.448 to R² = -0.294 but remains negative due to the dataset's cross-sectional nature.
+This document explains the technical choices made throughout the demand forecasting and pricing optimization project, providing detailed justification for each decision. These choices resulted in an optimized ensemble model that achieves 92.5% R² score and outperforms classical SARIMAX by 56% in RMSE (4.28 vs 9.71). SARIMAX has R² = -0.294 which is negative due to the dataset's cross-sectional nature.
 
 ---
 
