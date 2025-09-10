@@ -1,0 +1,90 @@
+# MLflow Configuration for Demand Forecasting & Price Optimization
+
+# MLflow Tracking Server Configuration
+tracking_uri: mlruns  # Local directory for tracking data
+# tracking_uri: http://localhost:5000  # Remote tracking server
+# tracking_uri: postgresql://user:password@host:port/database  # Database backend
+
+# Experiment Configuration
+experiment_name: demand-forecasting
+experiment_description: "Retail demand forecasting and price optimization experiments"
+
+# Artifact Storage Configuration
+artifact_location: null  # Use default (local mlruns/artifacts)
+# artifact_location: s3://bucket/path  # S3 storage
+# artifact_location: gs://bucket/path  # Google Cloud Storage
+# artifact_location: azure://container/path  # Azure Blob Storage
+
+# Model Registry Configuration
+registry_uri: null  # Use tracking_uri by default
+# registry_uri: postgresql://user:password@host:port/database
+
+# Experiment Tags (applied to all runs)
+default_tags:
+  project: demand-forecasting
+  team: data-science
+  environment: development
+  framework: ensemble
+
+# Logging Configuration
+log_models: true
+log_artifacts: true
+log_metrics_step: 1  # Log metrics at every step
+log_system_metrics: true  # Log CPU, memory, etc.
+
+# Model Versioning
+auto_register_best_model: true
+model_registry_name: demand-forecast-model
+staging_metric: rmse  # Metric to use for staging decisions
+staging_threshold: 10.0  # Models with metric below this go to staging
+
+# Experiment Comparison
+comparison_metrics:
+  - rmse
+  - mape
+  - r2
+  - revenue_lift_pct
+  - units_lift_pct
+
+# Run Configuration
+max_runs_per_experiment: 1000
+cleanup_runs_older_than_days: 90
+
+# UI Configuration
+ui_host: 0.0.0.0
+ui_port: 5000
+ui_workers: 4
+
+# Advanced Configuration
+enable_mlflow_projects: false  # Use MLflow Projects format
+enable_model_serving: false  # Enable model serving endpoints
+enable_autolog: true  # Automatic logging for supported frameworks
+
+# Framework-specific Autologging
+autolog_config:
+  sklearn:
+    log_input_examples: true
+    log_model_signatures: true
+    log_models: true
+  lightgbm:
+    log_input_examples: true
+    log_model_signatures: true
+    log_models: true
+  statsmodels:
+    log_models: true
+
+# Hyperparameter Tuning Integration
+hyperopt:
+  enabled: false
+  max_evals: 100
+  parallelism: 4
+
+# Alerts and Notifications (optional)
+notifications:
+  enabled: false
+  webhook_url: null  # Slack/Teams webhook
+  email_recipients: []
+  alert_on:
+    - experiment_complete
+    - model_registered
+    - metric_threshold_exceeded

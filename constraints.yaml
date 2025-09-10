@@ -1,0 +1,49 @@
+# Pricing Optimization Constraints Configuration
+# Used by: python pipeline.py optimize --constraints constraints.yaml
+
+# Price Bounds
+# Minimum and maximum price as a ratio of base price
+min_price_ratio: 0.7        # Minimum 70% of base price (30% max discount)
+max_price_ratio: 1.2        # Maximum 120% of base price (20% max markup)
+
+# Promotion Constraints
+# Maximum number of promotional days allowed per month
+max_promo_days_per_month: 10
+
+# Maximum discount depth during promotions
+max_discount_depth: 0.5     # Maximum 50% discount
+
+# Margin Constraints
+# Minimum acceptable margin ratio (profit/price)
+min_margin_ratio: 0.1       # At least 10% margin required
+
+# Inventory Constraints (Optional)
+# Stock limits per SKU - uncomment and modify as needed
+inventory_constraints:
+  SKU001: 1000              # Maximum 1000 units for SKU001
+  SKU002: 1500              # Maximum 1500 units for SKU002
+  SKU003: 2000              # Maximum 2000 units for SKU003
+
+# Store-Specific Constraints (Optional)
+# Different constraints per store if needed
+# store_constraints:
+#   S01:
+#     min_price_ratio: 0.75
+#     max_price_ratio: 1.15
+#   S02:
+#     min_price_ratio: 0.7
+#     max_price_ratio: 1.25
+
+# Competition Constraints (Optional)
+# Ensure prices stay competitive
+# max_price_vs_competitor: 1.05  # Maximum 5% above competitor price
+# min_price_vs_competitor: 0.95  # Minimum 5% below competitor price
+
+# Revenue/Volume Targets (Optional)
+# min_daily_revenue: 10000       # Minimum $10,000 daily revenue
+# min_daily_units: 500           # Minimum 500 units daily
+
+# Elasticity Bounds (Optional)
+# Realistic bounds on price elasticity
+# min_elasticity: -2.0           # Most elastic response
+# max_elasticity: -0.5           # Least elastic response

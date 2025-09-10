@@ -1,0 +1,19 @@
+# Conservative Pricing Strategy Constraints
+# Maintain margins and stability
+
+# Price Bounds - Narrow range for stability
+min_price_ratio: 0.9        # Maximum 10% discount
+max_price_ratio: 1.1        # Maximum 10% markup
+
+# Promotion Constraints - Limited promotions
+max_promo_days_per_month: 5   # Few promo days
+max_discount_depth: 0.2        # Shallow discounts only
+
+# Margin Constraints - High threshold
+min_margin_ratio: 0.25         # Maintain 25% margin
+
+# Strict inventory constraints
+inventory_constraints:
+  SKU001: 500               # Conservative stock limits
+  SKU002: 750
+  SKU003: 1000

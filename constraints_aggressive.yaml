@@ -1,0 +1,16 @@
+# Aggressive Pricing Strategy Constraints
+# Maximize revenue with fewer restrictions
+
+# Price Bounds - Wider range for testing
+min_price_ratio: 0.5        # Allow up to 50% discount
+max_price_ratio: 1.5        # Allow up to 50% markup
+
+# Promotion Constraints - More flexible
+max_promo_days_per_month: 20  # More promo days allowed
+max_discount_depth: 0.7        # Deeper discounts allowed
+
+# Margin Constraints - Lower threshold
+min_margin_ratio: 0.05         # Only 5% margin required
+
+# No inventory constraints for aggressive strategy
+# inventory_constraints: null

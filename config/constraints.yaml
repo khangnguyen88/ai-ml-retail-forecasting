@@ -1,0 +1,6 @@
+# Pricing Constraints Configuration
+min_price_ratio: 0.7  # Minimum price as ratio of base price
+max_price_ratio: 1.2  # Maximum price as ratio of base price
+max_promo_days: 10    # Maximum promotion days in horizon
+min_margin: 0.15      # Minimum margin requirement
+max_daily_price_change: 0.1  # Max daily price change (10%)

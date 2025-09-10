@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  # Main forecasting service
+  forecasting:
+    build: .
+    container_name: demand-forecasting
+    volumes:
+      # Persistent data storage
+      - ./models:/app/models
+      - ./reports:/app/reports
+      - ./config:/app/config
+      # Development volumes (optional - uncomment for development)
+      # - ./src:/app/src
+      # - ./notebooks:/app/notebooks
+    environment:
+      - PYTHONPATH=/app
+      - PYTHONUNBUFFERED=1
+    # Interactive mode for running commands
+    stdin_open: true
+    tty: true
+    command: python pipeline.py --help
+    networks:
+      - forecasting-network
+
+  # Training service - for model training tasks
+  training:
+    build: .
+    container_name: forecasting-training
+    volumes:
+      - ./models:/app/models
+      - ./reports:/app/reports
+      - ./config:/app/config
+    environment:
+      - PYTHONPATH=/app
+      - PYTHONUNBUFFERED=1
+    stdin_open: true
+    tty: true
+    command: python train_with_pipeline.py --help
+    networks:
+      - forecasting-network
+
+  # Prediction service
+  prediction:
+    build: .
+    container_name: forecasting-prediction  
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+      - ./reports:/app/reports
+    environment:
+      - PYTHONPATH=/app
+      - PYTHONUNBUFFERED=1
+    stdin_open: true
+    tty: true
+    command: python predict_with_pipeline.py --help
+    networks:
+      - forecasting-network
+
+  # Jupyter notebook for analysis
+  notebook:
+    image: jupyter/scipy-notebook:latest
+    container_name: forecasting-notebook
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/home/jovyan/work/notebooks
+      - ./models:/home/jovyan/work/models
+      - ./src:/home/jovyan/work/src
+      - .:/home/jovyan/work/data
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=forecasting123
+    networks:
+      - forecasting-network
+
+networks:
+  forecasting-network:
+    driver: bridge
+
+# Usage examples:
+# Train model: docker-compose run --rm training python train_with_pipeline.py --quick
+# Make predictions: docker-compose run --rm prediction python predict_with_pipeline.py --demo  
+# Compare models: docker-compose run --rm forecasting python pipeline.py compare --output report.txt
+# Start notebook: docker-compose up notebook
