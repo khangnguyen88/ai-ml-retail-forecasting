@@ -1,0 +1,25 @@
+{
+  "train_start": "2024-01-01",
+  "train_end": "2024-09-30",
+  "test_start": "2024-10-01",
+  "test_end": "2024-12-31",
+  "train_samples": 3288,
+  "val_samples": 822,
+  "test_samples": 1380,
+  "features": 91,
+  "timestamp": "2025-09-10T15:16:57.885098",
+  "metrics": {
+    "gradient_boosting": {
+      "rmse": 3.803801032847717,
+      "mape": 0.04156302917727994,
+      "r2": 0.9409917186716718,
+      "mae": 1.6232933406259176,
+      "mean_error": -1.278929811960555,
+      "median_error": -0.10504545645279784,
+      "coverage": 0.8565217391304348
+    }
+  },
+  "grid_search_used": false,
+  "optimized_hyperparameters_used": true,
+  "target_transformation": "disabled_for_stability"
+}
