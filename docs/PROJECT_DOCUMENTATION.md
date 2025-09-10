@@ -4,7 +4,7 @@ A production-ready solution for retail demand forecasting and price optimization
 
 ## Project Overview
 
-This system addresses the challenge of forecasting demand for a multi-store retailer (5 stores, 3 SKUs) while optimizing pricing decisions to maximize business KPIs. The solution demonstrates that optimized ensemble methods achieve 92.5% R² while classical SARIMAX was improved from R² = -0.448 to -0.294 (34% improvement) but remains negative due to the dataset's cross-sectional structure.
+This system addresses the challenge of forecasting demand for a multi-store retailer (5 stores, 3 SKUs) while optimizing pricing decisions to maximize business KPIs. The solution demonstrates that optimized ensemble methods achieve 92.5% R² while classical SARIMAX is -0.294, negative due to the dataset's cross-sectional structure.
 
 ## Key Achievements
 
