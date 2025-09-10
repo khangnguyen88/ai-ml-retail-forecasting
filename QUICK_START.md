@@ -3,7 +3,7 @@
 ## IMPORTANT: Model Compatibility Update
 **If you have existing models from earlier versions, you'll need to retrain them due to changes in the save/load mechanism. The new version uses pickle instead of joblib for better compatibility.**
 
-## Core Scripts (All You Need!)
+## Core Scripts
 
 After consolidation, the project now has just **3 main scripts**:
 
@@ -21,7 +21,7 @@ python pipeline.py optimize --horizon 14 --objective revenue
 python pipeline.py simulate --horizon 14 --price-plan plan.csv
 ```
 
-### 2. `train_with_pipeline.py` - Training (Recommended)
+### 2. `train_with_pipeline.py` - Training
 Modern training with optimized hyperparameters - NO WARNINGS!
 
 ```bash
@@ -107,13 +107,4 @@ After training, you'll have:
 - Visualizations and statistical analysis
 - Feature correlation analysis
 - Model interpretation insights
-
-## Benefits of This Structure
-
-1. **Simpler** - Just 3 scripts to understand
-2. **No Warnings** - Preprocessing pipeline handles all features
-3. **Consistent** - Same preprocessing for train and predict
-4. **Production Ready** - Pipeline can be deployed as-is
-5. **Interactive Analysis** - Jupyter notebook for deep data exploration
-
 ---
