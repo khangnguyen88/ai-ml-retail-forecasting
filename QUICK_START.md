@@ -19,7 +19,6 @@ python pipeline.py simulate --horizon 14 --price-plan plan.csv
 ```
 
 ### 2. `train_with_pipeline.py` - Training
-Modern training with optimized hyperparameters - NO WARNINGS!
 
 ```bash
 # Quick training with optimized parameters (~5 minutes) - BEST: R² = 0.923
@@ -33,7 +32,6 @@ python train_with_pipeline.py --optimize
 ```
 
 ### 3. `predict_with_pipeline.py` - Predictions
-Make predictions with proper preprocessing - NO WARNINGS!
 
 ```bash
 # Test with demo data
