@@ -292,11 +292,11 @@ except:
 
 ## 10. Testing Strategy Decisions
 
-### Test Coverage Target (≥80%)
+### Test Coverage Target (≥75%)
 **Decision:** Focus on business logic, not 100% coverage
 
 **Rationale:**
-- **Diminishing Returns**: Last 20% often boilerplate
+- **Diminishing Returns**: Last % often boilerplate
 - **Critical Paths**: Focus on feature engineering and optimization
 - **Practical**: Achievable and maintainable
 
@@ -357,11 +357,11 @@ The Gradient Boosting ensemble achieved superior results because:
 
 ### Performance Metrics Achieved
 
-| Metric | SARIMAX (improved) | Optimized Gradient Boosting | GB Advantage | Why It Matters |
+| Metric | SARIMAX | Optimized Gradient Boosting | GB Advantage | Why It Matters |
 |--------|-------------------|----------------------------|-------------|----------------|
-| RMSE | 9.71 (was 10.94) | 4.28 | 56% better | Superior inventory planning |
-| MAPE | 44.9% (was 47.4%) | 7.1% | 84% better | Highly accurate forecasts |
-| R² | -0.294 (was -0.448) | 0.925 | 92.5% explained variance | Excellent vs negative predictive power |
+| RMSE | 9.71 | 4.28 | 56% better | Superior inventory planning |
+| MAPE | 44.9% | 7.1% | 84% better | Highly accurate forecasts |
+| R² | -0.294 | 0.925 | 92.5% explained variance | Excellent vs negative predictive power |
 | Speed | 1.2s | 0.15s | 8x faster | Real-time pricing capability |
 
 **SARIMAX Improvements**: R² improved 34% from -0.448 to -0.294, RMSE improved from 10.94 to 9.71, but remains negative due to low temporal autocorrelation in this cross-sectional dataset.
