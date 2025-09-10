@@ -1,8 +1,5 @@
 # Quick Start Guide - Simplified Project Structure
 
-## IMPORTANT: Model Compatibility Update
-**If you have existing models from earlier versions, you'll need to retrain them due to changes in the save/load mechanism. The new version uses pickle instead of joblib for better compatibility.**
-
 ## Core Scripts
 
 After consolidation, the project now has just **3 main scripts**:
