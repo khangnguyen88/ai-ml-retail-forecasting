@@ -231,26 +231,6 @@ pytest tests/ --cov=src --cov-report=html
 python tests/integration_test.py
 ```
 
-## Project Structure
-
-```
-.
-├── pipeline.py              # Main CLI interface
-├── src/                     # Source code
-│   ├── data_loader.py       # Data management
-│   ├── features.py          # Feature engineering
-│   ├── models/              # Forecasting models
-│   └── pricing/             # Optimization logic
-├── tests/                   # Test suite
-├── notebooks/               # Analysis notebooks
-├── reports/                 # Generated reports
-├── models/                  # Saved model artifacts
-├── requirements.txt         # Dependencies
-├── Dockerfile               # Container definition
-├── docker-compose.yml       # Multi-service setup
-└── README.md                # This file
-```
-
 ## Advanced Features
 
 ### **Currently Implemented**
@@ -290,16 +270,6 @@ python tests/integration_test.py
    - Verify data quality
    - Check for structural breaks
    - Retrain with recent data
-
-## Contributing
-
-We welcome contributions! Please follow these guidelines:
-
-1. Fork the repository
-2. Create a feature branch
-3. Add tests for new functionality
-4. Ensure all tests pass
-5. Submit a pull request
 
 ## **Future Development Roadmap**
 
