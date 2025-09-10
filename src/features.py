@@ -191,10 +191,10 @@ class FeatureEngineer:
         df['log_price'] = np.log1p(df['final_price'])
         df['log_base_price'] = np.log1p(df['base_price'])
         
-        # Price relative to historical average
+        # Price relative to historical average (avoid leakage)
         df['price_vs_avg'] = df.groupby(['store_id', 'sku_id'])['final_price'].transform(
-            lambda x: x / x.expanding(min_periods=1).mean()
-        )
+            lambda x: x / x.shift(1).expanding(min_periods=1).mean()
+        ).fillna(1.0)
         
         return df
     
@@ -304,12 +304,17 @@ class FeatureEngineer:
         if 'final_price_lag_1' in df.columns and 'final_price_lag_7' in df.columns:
             df['price_momentum'] = df['final_price_lag_1'] - df['final_price_lag_7']
         
-        # Store-SKU performance features
-        df['store_sku_avg_demand'] = df.groupby(['store_id', 'sku_id'])['units_sold'].transform('mean')
+        # Store-SKU performance features (using historical data only to avoid leakage)
+        df['store_sku_avg_demand'] = df.groupby(['store_id', 'sku_id'])['units_sold'].transform(
+            lambda x: x.shift(1).expanding().mean()
+        ).fillna(0)
         df['demand_vs_historical'] = df['units_sold'] / (df['store_sku_avg_demand'] + 0.1)  # Avoid division by zero
         
-        # Market dynamics
-        df['market_share'] = df['units_sold'] / (df.groupby(['date'])['units_sold'].transform('sum') + 0.1)
+        # Market dynamics (using historical data only to avoid leakage)
+        df['daily_market_total'] = df.groupby(['date'])['units_sold'].transform(
+            lambda x: x.shift(1).expanding().mean() * len(x)
+        ).fillna(0)
+        df['market_share'] = df['units_sold'] / (df['daily_market_total'] + 0.1)
         df['competitive_advantage'] = (df['competitor_price'] - df['final_price']) / (df['final_price'] + 0.01)
         
         # Advanced price features
@@ -317,15 +322,19 @@ class FeatureEngineer:
             lambda x: x.rolling(window=7, min_periods=1).std()
         ).fillna(0)
         
-        # Demand trend features
+        # Demand trend features (avoid leakage)
         df['demand_trend'] = df.groupby(['store_id', 'sku_id'])['units_sold'].transform(
-            lambda x: x.rolling(window=7, min_periods=1).mean() - x.rolling(window=14, min_periods=1).mean()
+            lambda x: x.shift(1).rolling(window=7, min_periods=1).mean() - x.shift(1).rolling(window=14, min_periods=1).mean()
         ).fillna(0)
         
-        # Cross-price effects
-        df['relative_price_position'] = df.groupby(['date'])['final_price'].transform(
-            lambda x: (x - x.mean()) / (x.std() + 0.01)
-        ).fillna(0)
+        # Cross-price effects (avoid leakage by using historical market data)
+        df['historical_daily_price_mean'] = df.groupby(['date'])['final_price'].transform(
+            lambda x: x.shift(1).expanding().mean()
+        ).fillna(df['final_price'])
+        df['historical_daily_price_std'] = df.groupby(['date'])['final_price'].transform(
+            lambda x: x.shift(1).expanding().std()
+        ).fillna(1.0)
+        df['relative_price_position'] = (df['final_price'] - df['historical_daily_price_mean']) / (df['historical_daily_price_std'] + 0.01)
         
         return df
     
